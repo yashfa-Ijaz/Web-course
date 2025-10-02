@@ -1,0 +1,20 @@
+.A{
+    
+    border: 2px solid rgb(207, 26, 26);
+    width: 500px;
+    height: 400px;
+    padding: 20px;
+    margin: auto;
+   
+    background-color: lightblue;
+    font-family: Arial, sans-serif;
+}
+.B{
+    text-align: center; ;
+}
+
+.skill-list{
+    text-align: left;
+    
+    margin-left: 150px;
+}

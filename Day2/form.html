@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="form.css">
+    <title>My first website</title>
+   
+</head>
+<body>
+  <div class="form">
+    <h1><i>Application Form </i></h1>
+<form>
+    <label for="First name">First Name:</label>
+    <input type="text" id="First name" name="First name" required>
+      <label for="Last name">Last Name:</label>
+    <input type="text" id="Last name" name="Last name" required>
+    <br><br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" >
+    <br><br>
+     <label for="Current address">Current address:</label>
+    <input type="Current address" id="Current address" >
+    <br><br>
+    <label for="Phone number">Phone number:</label>
+     <input type="text" id="phone number" name="Phone number" required>
+     <br><br>
+    <label for="Applying for position">Applying for position:</label>
+    <input type="text"id="Application for position" required>
+    <br><br>
+  <label for="gender">Gender:</label><br>
+<input type="radio" id="male" name="gender" value="Male">
+<label for="male">Male</label><br>
+
+<input type="radio" id="female" name="gender" value="Female">
+<label for="female">Female</label>
+<br><br>
+<label for="province">Select Province:</label>
+<select id="province" name="province" required>
+  <option value="">-- Select Province --</option>
+  <option value="Punjab">Punjab</option>
+  <option value="Sindh">Sindh</option>
+  <option value="Khyber Pakhtunkhwa">Khyber Pakhtunkhwa</option>
+  <option value="Balochistan">Balochistan</option>
+</select>
+<label for="city">City:</label>
+<input type="text" id="city" name="city" required>
+<br><br>
+
+   <label for="DOB">DOB:</label>
+<input type="date" id="DOB" name="DOB" required>
+    <br><br>
+   <label for="coverLetter">Cover Letter:</label><br><br>
+<textarea id="coverLetter" name="coverLetter" rows="3" cols="50" placeholder="Please donot Exceed 3 lines..."></textarea>
+<br><br>
+    <label for="Upload a resume">Upload a resume:</label>
+    <input type="file" id="Upload a resume" name="Upload a resume" accept=".pdf,.doc,.docx" required>
+    <input type="submit" value="Submit">
+  </form>
+</div>
+</body>
+</html>

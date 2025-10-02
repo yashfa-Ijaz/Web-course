@@ -1,0 +1,13 @@
+.form{
+    border: 2px solid black;
+    padding: 20px;
+    margin: auto;
+    background-color: rgb(205, 187, 198);
+    height:600px;
+    width: 800px;
+    font-family: Arial, sans-serif;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+}
+.form h1{
+    text-align: left;
+}
