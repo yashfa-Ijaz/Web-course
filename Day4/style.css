@@ -1,0 +1,102 @@
+body{
+    background-color: rgb(240, 244, 247);
+}
+ /* header section */
+.container{
+    background-color: white;
+    padding: 20px 80px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    
+}
+/* logo */
+.logo{
+    height: 50px;
+}
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#MenuItems{
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    font-size: 18px;
+    color: grey;
+    text-decoration: none;
+
+}
+#MenuItems li a{
+    padding: 10px;
+    border-bottom: 2px solid transparent;
+    text-decoration: none;
+    color: grey;
+}
+#MenuItems li a:hover{
+    border-bottom: 2px solid orange;
+    color: orange;
+}
+/* button */
+button{
+    background-color: orange;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+button:hover{
+    background-color: darkorange;
+}
+
+/* herosection */
+.hero{
+   background-image:url("Assets/pic2\ \(1\).jpg");
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    height: 70vh;
+    opacity: 0.7;
+}
+.hero-content{
+    text-align: center;
+    justify-self: conter;
+    margin: auto;
+    padding: 100px 0;
+    color: white;
+
+}
+.hero-content h1{
+    font-size: 80px;
+    margin-bottom: 20px;
+}
+.hero-content p{
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+/* food-items */
+.food-items{
+    padding: 50px 80px;
+}
+.food-items-heading{
+    text-align: center;
+    font-size: 15px;
+    margin-bottom: 50px;
+    color: #333;
+}
+.row{
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+.food-items-container{
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    width: 300px;
+    text-align: center;
+}
