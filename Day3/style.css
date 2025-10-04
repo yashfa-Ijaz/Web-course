@@ -1,0 +1,89 @@
+.logo{
+    padding-top: 0px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    height: 70px;
+
+    display: flex;
+  justify-content: space-between;
+    gap: 20px; 
+    padding-left: 20px;
+  }
+  .auth{
+    display: flex;
+    gap: 30px;
+    margin-right: 100px;
+  }
+  .nav-section{
+
+    display: flex;
+    align-items: center;
+    background-color: white;
+    height: 80px;
+  }
+
+.nav-links{
+:hover {
+  background-color: darkorange;
+}
+    list-style: none;
+    display: flex;  
+    padding: 2px 20px;
+     border-radius: 10px; 
+    font-weight: bold;
+    font-size: 14px;
+    gap: 160px;
+   justify-content: space-around;
+    align-items: center;
+    height: 60px;
+    background-color: orange;
+    font-family: 'Poppins', sans-serif;
+}
+  .hero-section {
+    background-image: url("Assets/pic2.jpg");
+    opacity: 1.0;
+    background-size: cover; 
+    background-position: center;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+  }
+  .buttons{
+    text-align: center;
+  }
+    .images {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 21px;
+    text-align: center;
+    justify-content: center; // Center the items horizontally
+  }
+
+  .item p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 8px;
+  }
+  .load-more {
+  display: block;
+  margin: 20px auto; 
+    background-color: orange;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.load-more:hover {
+  background-color: darkorange; 
+}
