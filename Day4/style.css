@@ -1,14 +1,12 @@
 body{
     background-color: rgb(240, 244, 247);
 }
- /* header section */
 .container{
     background-color: white;
     padding: 20px 80px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     
 }
-/* logo */
 .logo{
     height: 50px;
 }
@@ -36,7 +34,6 @@ body{
     border-bottom: 2px solid orange;
     color: orange;
 }
-/* button */
 button{
     background-color: orange;
     color: white;
@@ -49,8 +46,6 @@ button{
 button:hover{
     background-color: darkorange;
 }
-
-/* herosection */
 .hero{
    background-image:url("Assets/pic2\ \(1\).jpg");
     height: 500px;
@@ -76,8 +71,6 @@ button:hover{
     font-size: 30px;
     margin-bottom: 30px;
 }
-
-/* food-items */
 .food-items{
     padding: 50px 80px;
 }

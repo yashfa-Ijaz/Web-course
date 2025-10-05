@@ -1,0 +1,41 @@
+.form-container{
+    background-color:purple;
+    width: 400px;
+    height: 420px;
+    text-align:center;
+      padding: 20px;
+    border-radius: 5px;
+font-family: Arial, sans-serif;
+max-width: 600px;
+margin-top: 30px;
+border: 3px solid black;
+/* decoration of text inside box */
+ input, textarea {
+    width: 90%; 
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 15px;
+  }}
+.info{
+    h3 i {
+  color: purple;     /* makes the icon purple */
+  margin-right: 8px; /* adds space between the icon and text */
+}
+    margin-top: 10px;
+    /* background-color:lightgrey; */
+    text-align:left;
+    width: 700px;
+    font-family: Arial, sans-serif;
+    text-wrap: wrap;
+    padding: 20px;
+    border-radius: 1px;
+}
+.contact-wrapper {
+  display:flex;
+  align-items: flex-start;
+  gap: 0px;
+}
+
