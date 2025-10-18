@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Travel Website</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="program.js">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .search-transition {
+      transition: all 0.3s ease-in-out;
+      transform-origin: top;
+    }
+    
+    .search-active {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+    
+    .search-hidden {
+      transform: scaleY(0);
+      opacity: 0;
+    }
+    
+    .hero-bg {
+      background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1740&q=80');
+    }
+    
+    .booking-bg {
+      background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1740&q=80');
+    }
+    
+    /* Discover More Popup Styles */
+    .discover-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(5px);
+    }
+    
+    .discover-content {
+      background-color: white;
+      border-radius: 1rem;
+      width: 90%;
+      max-width: 1000px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      position: relative;
+      animation: popIn 0.4s ease-out;
+    }
+    
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    .close-discover {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #6b7280;
+      z-index: 10;
+    }
+    
+    .close-discover:hover {
+      color: #374151;
+    }
+    
+    .destination-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .destination-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <header class="bg-gray-800 text-white relative">
+    <div class="container mx-auto flex items-center justify-between px-4 py-3">
+      
+      <!-- Logo -->
+      <h1 class="text-2xl font-bold"><span class="text-yellow-400">TR</span>AVEL</h1>
+
+      <!-- Menu Links -->
+      <nav class="space-x-6 hidden md:flex">
+        <a href="#hero" class="hover:text-yellow-400">Home</a>
+        <a href="#trip" class="hover:text-yellow-400">Book</a>
+        <a href="#packages" class="hover:text-yellow-400">Packages</a>
+        <a href="#services" class="hover:text-yellow-400">Services</a>
+        <a href="#contact" class="hover:text-yellow-400">Contact</a>
+      </nav>
+
+      <!-- Right Icons -->
+      <div class="flex items-center space-x-4">
+        <!--link to signup page -->
+        <a href="signup.html" class="bg-yellow-300 text-white px-4 py-2 rounded-lg hover:bg-blue-400 inline-block">
+            <i class="fas fa-user mr-2"></i>
+            Go to Sign Up Page
+        </a>
+
+        <!-- Search Icon -->
+        <div class="search-container">
+          <button id="search-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+          
+          <div class="search-bar-container">
+            <input type="text"class="text-blue-900 px-2 hidden" id="search-bar" class="hidden" placeholder="Enter your search query...">
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="relative">
+    <div class="relative w-full h-[90vh] bg-cover bg-center hero-bg">
+      <div class="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">ADVENTURE IS WORTHWHILE</h2>
+        <p class="text-lg mb-6">Discover New Places With Us, Adventure Awaits</p>
+        <button id="discover-btn" class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-3 rounded-md transition transform hover:scale-105">Discover More</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Discover More Popup -->
+  <div id="discover-popup" class="discover-overlay">
+    <div class="discover-content">
+      <button id="close-discover" class="close-discover">
+        <i class="fas fa-times"></i>
+      </button>
+      
+      <div class="p-8">
+        <h2 class="text-3xl font-bold text-center mb-2">Explore Hidden Gems</h2>
+        <p class="text-gray-600 text-center mb-8">Discover these exclusive destinations handpicked by our travel experts</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <!-- Hidden Destination 1 -->
+          <div class="destination-card bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="relative">
+              <img src="https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?auto=format&fit=crop&w=600&q=80" alt="Santorini" class="w-full h-48 object-cover">
+              <div class="absolute top-4 right-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-bold">Exclusive</div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-xl font-bold mb-2">Santorini, Greece</h3>
+              <p class="text-gray-600 mb-4">Experience breathtaking sunsets and iconic white-washed buildings in this Cycladic paradise.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-yellow-500 font-bold">$1,499</span>
+                <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md text-sm">View Details</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Hidden Destination 2 -->
+          <div class="destination-card bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="relative">
+              <img src="https://media.istockphoto.com/id/540409466/photo/macchu-pichu-peru.jpg?s=1024x1024&w=is&k=20&c=m2nxkdpusxlvZ0DkRlcPFGQzz__q3Aq_f0naXD0GB4s="alt="Machu Picchu" class="w-full h-48 object-cover">
+              <div class="absolute top-4 right-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-bold">Adventure</div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-xl font-bold mb-2">Machu Picchu, Peru</h3>
+              <p class="text-gray-600 mb-4">Trek through ancient ruins and experience one of the New Seven Wonders of the World.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-yellow-500 font-bold">$1,799</span>
+                <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md text-sm">View Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-yellow-50 p-6 rounded-xl border border-yellow-200">
+          <h3 class="text-xl font-bold mb-3 text-yellow-800">Special Offer Just For You</h3>
+          <p class="text-yellow-700 mb-4">Book any of these exclusive destinations today and get 15% off plus a free guided tour!</p>
+          <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-lg">Claim Offer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rest of your existing content (Booking, Packages, Services, Footer) -->
+  <!-- Booking Section -->
+  <section class="py-16 booking-bg bg-cover bg-center">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+        <div class="p-8">
+          <h2 id="trip" class="text-3xl font-bold text-center mb-8">Book Your Trip</h2>
+          
+          <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Where To -->
+            <div>
+              <label class="block text-gray-700 font-semibold mb-2">Where To</label>
+              <div class="relative">
+                <input type="text" placeholder="search places" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent">
+                <i class="fas fa-search absolute right-3 top-3 text-gray-400"></i>
+              </div>
+            </div>
+            
+            <!-- How Many -->
+            <div>
+              <label class="block text-gray-700 font-semibold mb-2">How Many</label>
+              <div class="relative">
+                <input type="number" placeholder="number of guests" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent">
+                <i class="fas fa-users absolute right-3 top-3 text-gray-400"></i>
+              </div>
+            </div>
+              <!-- Arrivals -->
+        <div class="mb-6">
+            <label class="block text-gray-700 font-semibold mb-2">Arrivals</label>
+            <div class="relative">
+                <input type="date" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent appearance-none">
+            </div>
+        </div>
+        
+        <!-- Leaving -->
+        <div>
+            <label class="block text-gray-700 font-semibold mb-2">Leaving</label>
+            <div class="relative">
+                <input type="date" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent appearance-none">
+            </div>
+    </div>
+            
+            <!-- Book Now Button -->
+            <div class="md:col-span-2 flex justify-center mt-4">
+              <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-8 rounded-lg transition duration-300 transform hover:scale-105">
+                Book Now
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Destinations Section -->
+  <section id="packages" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12">Popular Destinations</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=600&q=80" alt="Bali" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-bold mb-2">Bali, Indonesia</h3>
+            <p class="text-gray-600 mb-4">Experience the perfect blend of culture, beaches, and spirituality.</p>
+            <div class="flex justify-between items-center">
+              <span class="text-yellow-500 font-bold">$899</span>
+              <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md text-sm">Book Now</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1534008897995-27a23e859048?auto=format&fit=crop&w=600&q=80" alt="Paris" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-bold mb-2">Paris, France</h3>
+            <p class="text-gray-600 mb-4">The city of love, lights, and unforgettable experiences.</p>
+            <div class="flex justify-between items-center">
+              <span class="text-yellow-500 font-bold">$1,299</span>
+              <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md text-sm">Book Now</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1519677100203-a0e668c92439?auto=format&fit=crop&w=600&q=80" alt="Tokyo" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-xl font-bold mb-2">Tokyo, Japan</h3>
+            <p class="text-gray-600 mb-4">Where ancient traditions meet futuristic technology.</p>
+            <div class="flex justify-between items-center">
+              <span class="text-yellow-500 font-bold">$1,199</span>
+              <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md text-sm">Book Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="py-16 bg-gray-100">
+    <div class="container mx-auto px-4">
+      <h2 id="services"  class="text-3xl font-bold text-center mb-12">Our Services</h2>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+          <i class="fas fa-hotel text-3xl text-yellow-500 mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Affordable Hotels</h3>
+          <p class="text-gray-600">Comfortable stays that won't break your budget</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+          <i class="fas fa-utensils text-3xl text-yellow-500 mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Food & Drinks</h3>
+          <p class="text-gray-600">Taste the local cuisine and exotic beverages</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+          <i class="fas fa-bullhorn text-3xl text-yellow-500 mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Safety Guide</h3>
+          <p class="text-gray-600">Your safety is our top priority everywhere</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+          <i class="fas fa-globe-americas text-3xl text-yellow-500 mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Around the World</h3>
+          <p class="text-gray-600">Explore destinations across the globe</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact" class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <h2 class="text-2xl font-bold"><span class="text-yellow-400">TR</span>AVEL</h2>
+          <p class="text-gray-400 mt-2">Your journey begins with us</p>
+        </div>
+        
+        <div class="flex space-x-4">
+          <a href="#" class="text-gray-400 hover:text-yellow-400"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="text-gray-400 hover:text-yellow-400"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="text-gray-400 hover:text-yellow-400"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="text-gray-400 hover:text-yellow-400"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+        <p>&copy; 2023 Travel Website. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+    <script src="program.js"></script>
+</body>
+</html>
